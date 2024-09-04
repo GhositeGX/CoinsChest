@@ -10,31 +10,38 @@
 </head>
 <body>
     <header>
-        <h1>Trade</h1>
+        <h1 class="trade-header">Trade Now</h1>
     </header>
     <div class="container">
-        <div class="trade-form">
-            <h2>Buy/Sell Cryptocurrency</h2>
-            <form id="tradeForm">
-                <div class="form-group">
-                    <label for="tradeType">Trade Type:</label>
-                    <select id="tradeType" required>
-                        <option value="buy">Buy</option>
-                        <option value="sell">Sell</option>
-                    </select>
+        <div class="trade-container">
+            <form class="trade-form" id="tradeForm">
+                <h2>Trade Cryptocurrency</h2>
+                <div class="trade-type-toggle">
+                    <button type="button" class="active" data-trade-type="buy">Buy</button>
+                    <button type="button" data-trade-type="sell">Sell</button>
                 </div>
                 <div class="form-group">
                     <label for="cryptoSelect">Select Cryptocurrency:</label>
                     <select id="cryptoSelect" required>
                         <option value="">Choose a cryptocurrency</option>
+                        <option value="btc">Bitcoin (BTC)</option>
+                        <option value="eth">Ethereum (ETH)</option>
+                        <!-- Add more options as needed -->
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="tradeAmount">Amount</label>
-                    <input type="number" id="tradeAmount" required>
+                    <input type="number" id="tradeAmount" required placeholder="0.00">
                 </div>
-                <button type="submit" class="submit-button">Execute Trade</button>
+                <button type="submit" class="trade-button">Execute Trade</button>
             </form>
+
+            <div class="recent-transactions">
+                <h3>Recent Transactions</h3>
+                <ul class="transaction-list" id="transactionList">
+                    <!-- Transaction items will be added dynamically via JavaScript -->
+                </ul>
+            </div>
         </div>
     </div>
     <nav class="bottom-nav">

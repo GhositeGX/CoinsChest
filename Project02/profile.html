@@ -6,27 +6,67 @@
     <title>CryptoTrade App - Profile</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
 </head>
 <body>
     <header>
-        <h1>Profile</h1>
+        <h1 class="profile-header">Profile</h1>
     </header>
-    <div class="container" id="profileContainer">
-        <!-- Content will be dynamically inserted here -->
-    </div>
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <div id="modalBody"></div>
+    <div class="container">
+        <div id="profileContainer" class="profile-container" style="display: none;">
+            <div class="profile-info">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-picture">
+                <h2 class="profile-name">John Doe</h2>
+                <p class="profile-email">johndoe@example.com</p>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Balance</span>
+                    <span class="stat-value">$10,000</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Profit</span>
+                    <span class="stat-value profit">+$500</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Loss</span>
+                    <span class="stat-value loss">-$200</span>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button class="action-button"><i class="fas fa-cog"></i> Settings</button>
+                <button class="action-button"><i class="fas fa-bell"></i> Notifications</button>
+                <button class="action-button"><i class="fas fa-question-circle"></i> Help</button>
+                <button class="action-button logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+        <div id="createProfileContainer" class="profile-container">
+            <h2>Create Your Profile</h2>
+            <form id="createProfileForm">
+                <div class="form-group">
+                    <label for="profileName">Name</label>
+                    <input type="text" id="profileName" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileEmail">Email</label>
+                    <input type="email" id="profileEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="profilePassword">Password</label>
+                    <input type="password" id="profilePassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileConfirmPassword">Confirm Password</label>
+                    <input type="password" id="profileConfirmPassword" required>
+                </div>
+                <button type="submit" class="action-button">Create Profile</button>
+            </form>
         </div>
     </div>
     <nav class="bottom-nav">
         <a href="index.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
         <a href="portfolio.html" class="nav-item"><i class="fas fa-chart-pie"></i>Portfolio</a>
         <a href="trade.html" class="nav-item"><i class="fas fa-exchange-alt"></i>Trade</a>
-        <a href="profile.html" class="nav-item"><i class="fas fa-user"></i>Profile</a>
+        <a href="profile.html" class="nav-item active"><i class="fas fa-user"></i>Profile</a>
     </nav>
     <script src="common.js"></script>
     <script src="profile.js"></script>

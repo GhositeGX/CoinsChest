@@ -1,131 +1,62 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const profileContainer = document.getElementById('profileContainer');
-    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+    const createProfileContainer = document.getElementById('createProfileContainer');
+    const createProfileForm = document.getElementById('createProfileForm');
+    const logoutButton = document.querySelector('.action-button.logout');
 
-    if (!userProfile) {
-        profileContainer.innerHTML = `
-            <div class="profile-info">
-                <h2>No Profile Found</h2>
-                <p>Please create your profile to continue.</p>
-                <a href="create-profile.html" class="submit-button">Create Profile</a>
-            </div>
-        `;
-        return;
+    // Check if a profile exists in localStorage
+    const profile = JSON.parse(localStorage.getItem('userProfile'));
+
+    if (profile) {
+        // If a profile exists, show the profile container and hide the create profile form
+        profileContainer.style.display = 'block';
+        createProfileContainer.style.display = 'none';
+        displayProfile(profile);
+    } else {
+        // If no profile exists, show the create profile form
+        profileContainer.style.display = 'none';
+        createProfileContainer.style.display = 'block';
     }
 
-    profileContainer.innerHTML = `
-        <div class="profile-info">
-            <div class="profile-photo" style="background-image: url(${userProfile.profilePhoto || 'https://via.placeholder.com/100'})"></div>
-            <h2 id="userName">${userProfile.fullName}</h2>
-            <p id="userEmail">${userProfile.email}</p>
-        </div>
-        <div class="settings">
-            <h3>Settings</h3>
-            <ul>
-                <li><button id="changePhotoBtn" class="settings-btn">Change Profile Photo</button></li>
-                <li><button id="changePasswordBtn" class="settings-btn">Change Password</button></li>
-                <li><button id="notificationBtn" class="settings-btn">Notification Preferences</button></li>
-                <li><button id="twoFactorBtn" class="settings-btn">Two-Factor Authentication</button></li>
-                <li><button id="linkedAccountsBtn" class="settings-btn">Linked Accounts</button></li>
-            </ul>
-        </div>
-    `;
+    // Handle profile creation
+    createProfileForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('profileName').value;
+        const email = document.getElementById('profileEmail').value;
+        const password = document.getElementById('profilePassword').value;
+        const confirmPassword = document.getElementById('profileConfirmPassword').value;
 
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const closeBtn = document.getElementsByClassName('close')[0];
+        // Remove any existing error messages
+        document.querySelectorAll('.error-message').forEach(el => el.remove());
 
-    function openModal(title, content) {
-        modalTitle.textContent = title;
-        modalBody.innerHTML = content;
-        modal.style.display = 'block';
-    }
-
-    closeBtn.onclick = function() {
-        modal.style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+        // Validate passwords
+        if (password !== confirmPassword) {
+            const errorMessage = document.createElement('p');
+            errorMessage.textContent = 'Passwords do not match';
+            errorMessage.className = 'error-message';
+            document.getElementById('profileConfirmPassword').parentNode.appendChild(errorMessage);
+            return;
         }
+
+        // In a real application, you would hash the password before storing it
+        const newProfile = { name, email, password: password };
+        localStorage.setItem('userProfile', JSON.stringify(newProfile));
+
+        profileContainer.style.display = 'block';
+        createProfileContainer.style.display = 'none';
+        displayProfile(newProfile);
+    });
+
+    // Handle logout
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem('userProfile');
+        profileContainer.style.display = 'none';
+        createProfileContainer.style.display = 'block';
+        createProfileForm.reset();
+    });
+
+    function displayProfile(profile) {
+        document.querySelector('.profile-name').textContent = profile.name;
+        document.querySelector('.profile-email').textContent = profile.email;
     }
-
-    document.getElementById('changePasswordBtn').addEventListener('click', function() {
-        openModal('Change Password', `
-            <form id="changePasswordForm">
-                <input type="password" placeholder="Current Password" required>
-                <input type="password" placeholder="New Password" required>
-                <input type="password" placeholder="Confirm New Password" required>
-                <button type="submit">Change Password</button>
-            </form>
-        `);
-    });
-
-    document.getElementById('notificationBtn').addEventListener('click', function() {
-        openModal('Notification Preferences', `
-            <form id="notificationForm">
-                <label><input type="checkbox" name="emailNotif"> Email Notifications</label>
-                <label><input type="checkbox" name="pushNotif"> Push Notifications</label>
-                <label><input type="checkbox" name="smsNotif"> SMS Notifications</label>
-                <button type="submit">Save Preferences</button>
-            </form>
-        `);
-    });
-
-    document.getElementById('twoFactorBtn').addEventListener('click', function() {
-        openModal('Two-Factor Authentication', `
-            <p>Enhance your account security with 2FA.</p>
-            <button id="setup2FABtn">Set up 2FA</button>
-        `);
-        document.getElementById('setup2FABtn').addEventListener('click', function() {
-            window.location.href = 'two-factor.html';
-        });
-    });
-
-    document.getElementById('linkedAccountsBtn').addEventListener('click', function() {
-        openModal('Linked Accounts', `
-            <ul>
-                <li>Google Account: Not Linked</li>
-                <li>Facebook Account: Not Linked</li>
-                <li>Twitter Account: Not Linked</li>
-            </ul>
-            <button>Link New Account</button>
-        `);
-    });
-
-    document.getElementById('changePhotoBtn').addEventListener('click', function() {
-        openModal('Change Profile Photo', `
-            <form id="changePhotoForm">
-                <input type="file" id="newProfilePhoto" accept="image/*">
-                <div id="newPhotoPreview" class="photo-preview"></div>
-                <button type="submit">Update Photo</button>
-            </form>
-        `);
-
-        const newPhotoInput = document.getElementById('newProfilePhoto');
-        const newPhotoPreview = document.getElementById('newPhotoPreview');
-        
-        newPhotoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    newPhotoPreview.style.backgroundImage = `url(${e.target.result})`;
-                    newPhotoPreview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('changePhotoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const newPhotoData = newPhotoPreview.style.backgroundImage.slice(5, -2);
-            userProfile.profilePhoto = newPhotoData;
-            localStorage.setItem('userProfile', JSON.stringify(userProfile));
-            document.querySelector('.profile-photo').style.backgroundImage = `url(${newPhotoData})`;
-            modal.style.display = 'none';
-        });
-    });
 });

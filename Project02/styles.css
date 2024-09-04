@@ -12,6 +12,10 @@ body {
     margin: 0 auto;
 }
 
+.trade-header {
+    text-align: center;
+}
+
 .balance-section {
     display: flex;
     justify-content: space-between;
@@ -423,42 +427,53 @@ body {
 }
 
 .modal-content {
-    background-color: #1e2126;
+    background-color: #1E222D;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 300px;
-    border-radius: 10px;
+    max-width: 500px;
+    color: #d1d4dc;
 }
 
-.modal-content h3 {
-    margin-top: 0;
-    color: #ffffff;
-}
-
-.modal-content input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #3d4452;
-    background-color: #2c3e50;
-    color: #ffffff;
-    border-radius: 5px;
-}
-
-.modal-content button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    background-color: #2ecc71;
-    color: #ffffff;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
 }
 
-.modal-content button:hover {
-    background-color: #27ae60;
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#setAlertForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#setAlertForm input,
+#setAlertForm select,
+#setAlertForm button {
+    padding: 5px;
+    background-color: #2B2B43;
+    color: #d1d4dc;
+    border: 1px solid #4a4a4a;
+}
+
+#setAlertForm button {
+    cursor: pointer;
+    background-color: #2962FF;
+    border: none;
+}
+
+#setAlertForm button:hover {
+    background-color: #0039cb;
 }
 
 .chart-type-toggle {
@@ -599,4 +614,352 @@ body {
 .coin-chart-container {
     height: 400px;
     margin-top: 20px;
+}
+
+/* Trade Tab Styles */
+.trade-container {
+    background-color: #1e2126;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Add this new style for the Trade header */
+.trade-header {
+    text-align: center;
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.trade-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.trade-form h2 {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #8a8f98;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.trade-type-toggle {
+    display: flex;
+    background-color: #2c3e50;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.trade-type-toggle button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    color: #8a8f98;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.trade-type-toggle button.active {
+    background-color: #3498db;
+    color: #ffffff;
+}
+
+.trade-button {
+    background-color: #3498db;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.trade-button:hover {
+    background-color: #2980b9;
+}
+
+.recent-transactions {
+    margin-top: 30px;
+}
+
+.recent-transactions h3 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.transaction-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.transaction-coin {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.transaction-date {
+    font-size: 14px;
+    color: #8a8f98;
+}
+
+.transaction-amount {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.transaction-buy {
+    color: #2ecc71;
+}
+
+.transaction-sell {
+    color: #e74c3c;
+}
+
+/* Profile Tab Styles */
+.profile-header {
+    text-align: center;
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.profile-container {
+    background-color: #1e2126;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.profile-name {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.profile-email {
+    font-size: 16px;
+    color: #8a8f98;
+}
+
+/* Create Profile Styles */
+#createProfileContainer {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#createProfileContainer h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#createProfileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#createProfileForm .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#createProfileForm label {
+    font-size: 14px;
+    color: #8a8f98;
+    margin-bottom: 5px;
+}
+
+#createProfileForm input {
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+#createProfileForm .action-button {
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Create Profile Styles */
+#createProfileContainer {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#createProfileContainer h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#createProfileForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#createProfileForm .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+#createProfileForm label {
+    font-size: 14px;
+    color: #8a8f98;
+    margin-bottom: 5px;
+}
+
+#createProfileForm input {
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+#createProfileForm .action-button {
+    margin-top: 10px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #8a8f98;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.profit {
+    color: #2ecc71;
+}
+
+.loss {
+    color: #e74c3c;
+}
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-button {
+    background-color: #2c3e50;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-button i {
+    margin-right: 10px;
+}
+
+.action-button:hover {
+    background-color: #34495e;
+}
+
+.action-button.logout {
+    background-color: #e74c3c;
+}
+
+.action-button.logout:hover {
+    background-color: #c0392b;
 }

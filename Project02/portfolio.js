@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const alertButton = document.getElementById('alertButton');
     const chartTypeToggle = document.getElementById('chartTypeToggle');
     const coinChartContainer = document.getElementById('coinChartContainer');
+    const alertModal = document.getElementById('alertModal');
+    const closeAlertModal = document.getElementById('closeAlertModal');
+    const setAlertForm = document.getElementById('setAlertForm');
 
     // Sample data
     const portfolioData = {
@@ -233,7 +236,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     alertButton.addEventListener('click', () => {
-        // Implement alert functionality
+        if (currentCoin) {
+            document.getElementById('alertCoinName').textContent = currentCoin.name;
+            document.getElementById('alertCurrentPrice').textContent = `$${currentCoin.value.toFixed(2)}`;
+            alertModal.style.display = 'block';
+        } else {
+            alert('Please select a coin first.');
+        }
     });
 
     chartTypeToggle.addEventListener('click', () => {
@@ -242,6 +251,40 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.className = currentChartType === 'line' ? 'fas fa-chart-line' : 'fas fa-chart-bar';
         createCoinChart(currentCoin.symbol);
     });
+
+    // Add this function to handle setting up the alert
+    function setupAlertButton() {
+        alertButton.addEventListener('click', () => {
+            if (currentCoin) {
+                document.getElementById('alertCoinName').textContent = currentCoin.name;
+                document.getElementById('alertCurrentPrice').textContent = `$${currentCoin.value.toFixed(2)}`;
+                alertModal.style.display = 'block';
+            } else {
+                alert('Please select a coin first.');
+            }
+        });
+
+        closeAlertModal.addEventListener('click', () => {
+            alertModal.style.display = 'none';
+        });
+
+        setAlertForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const alertPrice = document.getElementById('alertPrice').value;
+            const alertDirection = document.getElementById('alertDirection').value;
+            
+            // Here you would typically send this data to your backend or store it locally
+            console.log(`Alert set for ${currentCoin.name} when price ${alertDirection} $${alertPrice}`);
+            
+            // For demonstration, we'll just show an alert
+            alert(`Alert set for ${currentCoin.name} when price ${alertDirection} $${alertPrice}`);
+            
+            alertModal.style.display = 'none';
+        });
+    }
+
+    // Call this function to set up the alert button functionality
+    setupAlertButton();
 
     // Initialize the portfolio view
     updatePortfolioOverview(portfolioData);
