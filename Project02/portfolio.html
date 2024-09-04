@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoTrade App - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Assets</h1>
+        </header>
+        <main>
+            <div id="portfolioView">
+                <div class="portfolio-header">
+                    <h1>Portfolio</h1>
+                    <div class="portfolio-balance">
+                        <span class="balance-label">Total Balance</span>
+                        <span class="balance-amount">$10,000.00</span>
+                        <span class="balance-change positive-change">+5.2%</span>
+                    </div>
+                </div>
+                <div id="portfolioChart" class="portfolio-chart-container"></div>
+                <div class="asset-list">
+                    <h2>Your Assets</h2>
+                    <ul id="assetList">
+                        <!-- Asset items will be dynamically added here -->
+                    </ul>
+                </div>
+            </div>
+            <div id="coinView" style="display: none;">
+                <div class="coin-header">
+                    <button id="backToPortfolio" class="back-button">&larr; Back to Portfolio</button>
+                    <button id="alertButton" class="alert-button">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                </div>
+                <div class="coin-overview">
+                    <div class="coin-info">
+                        <div id="coinIcon" class="coin-icon"></div>
+                        <h2 id="coinName"></h2>
+                        <span id="coinValue" class="coin-value"></span>
+                        <span id="coinChange" class="coin-change"></span>
+                        <button id="chartTypeToggle" class="chart-type-toggle">
+                            <i class="fas fa-chart-line"></i>
+                        </button>
+                    </div>
+                    <div id="coinChartContainer" class="coin-chart-container"></div>
+                </div>
+            </div>
+        </main>
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item"><i class="fas fa-home"></i>Home</a>
+            <a href="portfolio.html" class="nav-item active"><i class="fas fa-chart-pie"></i>Portfolio</a>
+            <a href="trade.html" class="nav-item"><i class="fas fa-exchange-alt"></i>Trade</a>
+            <a href="profile.html" class="nav-item"><i class="fas fa-user"></i>Profile</a>
+        </nav>
+    </div>
+    <script src="common.js"></script>
+    <script src="portfolio.js"></script>
+</body>
+</html>
